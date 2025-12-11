@@ -1,22 +1,10 @@
 
 import telebot
+from telebot import types
 import os
 
 TOKEN = os.getenv("BOT_TOKEN")
 bot = telebot.TeleBot(TOKEN)
-
-@bot.message_handler(commands=['start'])
-def start(message):
-    bot.send_message(message.chat.id, "Бот успешно работает!")
-
-bot.polling()
-
-import telebot
-from telebot import types
-
-TOKEN = "8386565804:AAGHtvRocF3V6RpofnbRve94lVndIo03GVo"
-bot = telebot.TeleBot(TOKEN)
-
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -38,25 +26,20 @@ def start(message):
         reply_markup=markup
     )
 
-
 @bot.message_handler(func=lambda message: message.text == "📘 Правила")
 def rules(message):
     bot.send_message(message.chat.id, "Здесь будут правила канала.")
-
 
 @bot.message_handler(func=lambda message: message.text == "📂 Категории")
 def categories(message):
     bot.send_message(message.chat.id, "Здесь будут категории объявлений.")
 
-
 @bot.message_handler(func=lambda message: message.text == "👤 Поддержка")
 def support(message):
-    bot.send_message(message.chat.id, "Связаться с админом: @username")  # замени на свой логин
-
+    bot.send_message(message.chat.id, "Связаться с админом: @username")  # поменяй на свой логин
 
 @bot.message_handler(func=lambda message: message.text == "📝 Подать объявление")
 def ad_create(message):
     bot.send_message(message.chat.id, "Начинаем создание объявления!")
-
 
 bot.infinity_polling()
